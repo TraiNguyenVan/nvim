@@ -19,6 +19,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'            " Git status
 Plug 'ryanoasis/vim-devicons'                 " Icon
 Plug 'unkiwii/vim-nerdtree-sync'              " Sync current file 
 Plug 'jcharum/vim-nerdtree-syntax-highlight',
+Plug 'preservim/nerdcommenter'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -43,11 +44,26 @@ let g:airline_symbols.dirty='⚡'
 
 
 :nmap ; :
-
 let mapleader = "\<Space>"
 nnoremap <silent><leader>bd :<C-U>bprevious <bar> bdelete #<CR>
 map <silent> <F2> :NERDTreeToggle<CR>
-nnoremap <silent><leader>e :NERDTreeFocus<CR>
+" nnoremap <silent><leader>e :NERDTreeFocus<CR>
+" map <silent> <leader> c :NERDTreeToggle<CR>
+imap jj <Esc>
+nnoremap <F3> :CocCommand document.toggleInlayHint<CR>
+
+
+inoremap <silent><expr> <Tab>
+
+imap hh <C-l>
+imap ll <C-j>
+inoremap ;; <Esc>A;<CR>
+inoremap ff <Esc>A 
+inoremap [[ <Esc>A {<CR>}<Esc>ko
+
+
+
+
 let g:NERDTreeGitStatusIndicatorMapCustom = {
             \ 'Modified'  : '',   
             \ 'Staged'    : '',   
@@ -66,9 +82,17 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
+nnoremap <silent> <expr> <Leader><Leader> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
+
 
 autocmd FileType cpp nmap <buffer> <F6> :w<bar>!alacritty -e sh -c '"./%:r" && read -p "Press enter to continue"'<CR>
 autocmd FileType cpp nmap <silent> <F5> :w<bar>!g++ -o "%:r" "%" && alacritty -e sh -c '"./%:r" && read -p "Press enter to continue"'<CR>
+
+
+" Disable automatic comment in newline
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
 " utf-8 byte sequence
