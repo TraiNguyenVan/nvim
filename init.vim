@@ -5,6 +5,7 @@ Plug 'vim-airline/vim-airline'   			  " Status line
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'navarasu/onedark.nvim'
+Plug 'morhetz/gruvbox'
 
 Plug 'neoclide/coc.nvim', 
 			\ {'branch': 'release'}                     " Language server protocol (LSP) 
@@ -55,9 +56,9 @@ nnoremap <F3> :CocCommand document.toggleInlayHint<CR>
 
 inoremap <silent><expr> <Tab>
 
-imap hh <C-l>
-imap ll <C-j>
-inoremap ;; <Esc>A;<CR>
+"imap hh <C-l>
+"imap ll <C-j>
+""inoremap ;; <Esc>A;<CR>
 inoremap ff <Esc>A 
 inoremap [[ <Esc>A {<CR>}<Esc>ko
 
@@ -256,6 +257,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 set tabstop=4
-colorscheme onedark
+set number
+colorscheme gruvbox
 
 set termguicolors
