@@ -59,7 +59,7 @@ inoremap <silent><expr> <Tab>
 "imap hh <C-l>
 "imap ll <C-j>
 ""inoremap ;; <Esc>A;<CR>
-inoremap ff <Esc>A 
+" inoremap ff <Esc>A 
 inoremap [[ <Esc>A {<CR>}<Esc>ko
 
 
