@@ -1,0 +1,2 @@
+apk add neovim git build-base wget
+git clone https://github.com/TraiLoveLinh/nvim.git ~/.config/nvim
