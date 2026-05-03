@@ -84,7 +84,22 @@ return {
       -- ÉP BUỘC GHI ĐÈ: Xóa sạch các config cũ của LazyVim
       dap.configurations.cpp = single_file_config
       dap.configurations.c = single_file_config
-      dap.configurations.rust = single_file_config -- Thêm luôn Rust nếu thích
+      dap.configurations.rust = single_file_config
+
+      -- Python debug configuration (single-file automation)
+      dap.configurations.python = {
+        {
+          name = "Debug Single File",
+          type = "python",
+          request = "launch",
+          program = function()
+            return vim.fn.expand("%:p")
+          end,
+          cwd = "${fileDirname}",
+          stopOnEntry = false,
+          console = "integratedTerminal",
+        },
+      }
     end,
   },
 }
