@@ -139,11 +139,12 @@ Choose the command block corresponding to your Linux distribution:
 sudo dnf groupinstall "Development Tools"
 sudo dnf install gcc-c++ gdb
 
-# Install CLI helper utilities
-sudo dnf install lazygit fzf git
+# Enable Copr repo for lazygit and install it
+sudo dnf copr enable atim/lazygit -y
+sudo dnf install lazygit
 
-# Install terminal emulators (optional, for <F5> launcher)
-sudo dnf install ptyxis kitty
+# Install other CLI helpers and terminal emulators
+sudo dnf install fzf git ptyxis kitty
 ```
 
 #### 🟠 Debian / Ubuntu Linux
