@@ -14,16 +14,74 @@ A customized [LazyVim](https://github.com/LazyVim/LazyVim) configuration specifi
 
 ---
 
-## 🎹 Keyboard Shortcuts & Automation
+## 🎹 Keyboard Shortcuts & Workflows
 
-Here is the custom automation mapped to your functional keys:
+This configuration integrates custom keybinds for C/C++ development with standard, highly efficient [LazyVim](https://github.com/LazyVim/LazyVim) shortcuts.
 
-| Key | Action | Engine & Behavior |
-| :--- | :--- | :--- |
-| **`<F5>`** | **Compile & Run (External/Floating)** | Saves the file, compiles it (`g++` / `gcc`), and runs it. Uses **`ptyxis`**, **`kitty`**, or **`gnome-terminal`** if available; otherwise, displays in a floating `toggleterm`. Prompts before closing. |
-| **`<F6>`** | **Run in Bottom Split** | Saves, compiles, and runs inside a horizontal bottom-split terminal (`toggleterm`). |
-| **`<F7>`** | **Build with Debug Info & Debug** | Compiles using `-g -O0` for debug symbols and automatically initiates debugging session with `nvim-dap`. |
-| **`<C-\>`** | **Toggle Terminal** | Shows/hides the horizontal bottom split terminal. |
+### 🚀 1. Dev-C++ Style Quick Running
+Save, compile, and run your single-file C, C++, or Python scripts with one keypress:
+* **`<F5>`** — **Compile & Run (External/Floating)**: Compiles the active buffer (using `g++` or `gcc`) and executes it inside an external window (**Ptyxis**, **Kitty**, or **Gnome Terminal**). If no external terminal is installed, it runs in a floating `toggleterm`.
+* **`<F6>`** — **Run in Bottom Split**: Compiles and runs the code directly inside a bottom horizontal terminal pane (`toggleterm`).
+
+---
+
+### 🪲 2. Debugging Workflow (`nvim-dap` & `dap-ui`)
+A fully-integrated GUI debugging experience for C, C++, Rust, and Python.
+
+- **`<F7>`** — **Build & Start Debugging**: Automates compiling the file with debugging flags (`-g -O0` for C/C++), starts the `dap` session, and opens the DAP UI panel on the right.
+- **`<leader>db`** — **Toggle Breakpoint**: Place a breakpoint on the current cursor line.
+- **`<leader>dc`** — **Continue**: Resume program execution until the next breakpoint.
+- **`<leader>dO`** — **Step Over**: Step to the next line of code without entering functions.
+- **`<leader>di`** — **Step Into**: Step inside the function under the cursor.
+- **`<leader>do`** — **Step Out**: Finish the current function and return to its caller.
+- **`<leader>dt`** — **Terminate**: Instantly end the debugging session.
+
+#### 🎛️ DAP UI Mappings (active inside the debug sidebar):
+- **`<CR>`** or **Double-Click** — Expand/Collapse variable details.
+- **`o`** — Open/inspect values.
+- **`d`** — Remove a watched variable.
+- **`e`** — Edit variable values inline.
+- **`t`** — Toggle execution frame.
+
+---
+
+### 📁 3. File Browsing & Search
+Easily navigate, open, and manage files in your workspace.
+
+- **`<leader>e`** or **`<leader>E`** — **Toggle File Tree**: Opens/closes the **Neo-tree** file explorer.
+- **`<leader><space>`** — **Find Files**: Instantly fuzzy search and open files in the current workspace.
+- **`<leader>ff`** — **Find Files (Alternate)**: Standard file locator panel.
+- **`<leader>/`** or **`<leader>sg`** — **Live Grep**: Search for text patterns across all files in your project.
+- **`<leader>fb`** — **Buffers List**: Quick switcher to display and toggle open buffers.
+
+---
+
+### 🎨 4. Code Formatting & LSP
+Maintain code quality with auto-formatting and compiler integrations.
+
+- **`<leader>cf`** — **Format Document**: Manually run the code formatter (uses `conform.nvim` with `stylua`, `shfmt` or LSP formatting).
+- **`gd`** — **Go to Definition**: Jump to the source code definition of the symbol under your cursor.
+- **`gr`** — **Find References**: Lists all locations where the current symbol is referenced.
+- **`K`** — **Hover Info**: Displays the type definition, signature, and documentation for the symbol.
+- **`<leader>cr`** — **Rename Symbol**: Refactor and rename all instances of a variable or function project-wide.
+
+---
+
+### 🐙 5. Git Workflow (`gitsigns` & `lazygit`)
+Track and commit changes without leaving Neovim.
+
+- **`<leader>gg`** — **Open LazyGit**: Launches the full terminal Git interface in a floating window.
+- **`]c`** / **`[c`** — **Next/Prev Hunk**: Move cursor directly to the next/previous code change.
+- **`<leader>ghd`** — **Diff Hunk**: View inline diff comparing changes in the current block to the git index.
+- **`<leader>ghs`** — **Stage Hunk**: Stage the current hunk of changes.
+- **`<leader>ghr`** — **Reset Hunk**: Revert the current hunk to the committed state.
+- **`<leader>gB`** — **Git Blame Line**: Show git blame information for the current line.
+
+---
+
+### 🖥️ 6. Terminal Management
+- **`<C-\>`** — **Toggle Terminal**: Show or hide the bottom split terminal pane (`toggleterm`).
+- **`q`** (Normal mode inside terminal) — Close/hide the terminal panel.
 
 ---
 
