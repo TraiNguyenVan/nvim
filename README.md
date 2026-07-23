@@ -14,6 +14,58 @@ A customized [LazyVim](https://github.com/LazyVim/LazyVim) configuration specifi
 
 ---
 
+## 📥 Installation & Setup
+
+Neovim configurations only contain editor settings. System-level tools (compilers, terminal emulators, and git tools) must be installed on your host system.
+
+### 1. Clone the Configuration
+Clone this repository to your local Neovim config folder:
+```bash
+git clone https://github.com/TraiNguyenVan/nvim.git ~/.config/nvim
+```
+
+### 2. Install System Dependencies
+Choose the command block corresponding to your Linux distribution:
+
+#### 🔵 Fedora Linux
+```bash
+# Install compilation tools (g++, gcc, gdb)
+sudo dnf groupinstall "Development Tools"
+sudo dnf install gcc-c++ gdb
+
+# Enable Copr repo for lazygit and install it
+sudo dnf copr enable atim/lazygit -y
+sudo dnf install lazygit
+
+# Install other CLI helpers and terminal emulators
+sudo dnf install fzf git ptyxis kitty
+```
+
+#### 🟠 Debian / Ubuntu Linux
+```bash
+# Install compilation tools (g++, gcc, gdb)
+sudo apt update
+sudo apt install build-essential gdb git fzf -y
+
+# Install terminal emulators (optional, for <F5> launcher)
+sudo apt install ptyxis kitty -y
+
+# Install lazygit (via github release binary)
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin/
+rm lazygit lazygit.tar.gz
+```
+
+### 3. Neovim Mason Packages
+The following editor tools are installed automatically or manually inside Neovim. Open Neovim and run `:Mason` to verify their installation:
+- **`codelldb`** (Required for `<F7>` debug automation)
+- **`clangd`** (C/C++ Language Server Protocol)
+- **`stylua`**, **`shellcheck`**, **`shfmt`**, **`flake8`** (Formatters & linters)
+
+---
+
 ## 🎹 Keyboard Shortcuts & Workflows
 
 This configuration integrates custom keybinds for C/C++ development with standard, highly efficient [LazyVim](https://github.com/LazyVim/LazyVim) shortcuts.
@@ -112,62 +164,3 @@ Once inside **LazyGit**, use these essential controls:
 - [lua/config/options.lua](file:///home/trai/.config/nvim/lua/config/options.lua) — Indentation settings (4-spaces width).
 - [lua/plugins/dap.lua](file:///home/trai/.config/nvim/lua/plugins/dap.lua) — Registers C/C++/Rust and Python launch targets for `nvim-dap` mapping directly to the active buffer.
 - [lua/plugins/terminal.lua](file:///home/trai/.config/nvim/lua/plugins/terminal.lua) — Configures bottom split terminal and terminal layout defaults.
-
----
-
-## 📥 Installation
-
-Simply clone this repository to your local Neovim config folder:
-
-```bash
-git clone https://github.com/TraiNguyenVan/nvim.git ~/.config/nvim
-```
-
----
-
-## 🛠️ System Requirements & Installation
-
-Neovim configurations only contain editor settings. System-level tools (compilers, terminal emulators, and git tools) must be installed on your host system.
-
-### 1. Install System Dependencies
-
-Choose the command block corresponding to your Linux distribution:
-
-#### 🔵 Fedora Linux
-```bash
-# Install compilation tools (g++, gcc, gdb)
-sudo dnf groupinstall "Development Tools"
-sudo dnf install gcc-c++ gdb
-
-# Enable Copr repo for lazygit and install it
-sudo dnf copr enable atim/lazygit -y
-sudo dnf install lazygit
-
-# Install other CLI helpers and terminal emulators
-sudo dnf install fzf git ptyxis kitty
-```
-
-#### 🟠 Debian / Ubuntu Linux
-```bash
-# Install compilation tools (g++, gcc, gdb)
-sudo apt update
-sudo apt install build-essential gdb git fzf -y
-
-# Install terminal emulators (optional, for <F5> launcher)
-sudo apt install ptyxis kitty -y
-
-# Install lazygit (via github release binary)
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit /usr/local/bin/
-rm lazygit lazygit.tar.gz
-```
-
----
-
-### 2. Neovim Mason Packages
-The following editor tools are installed automatically or manually inside Neovim. Open Neovim and run `:Mason` to verify their installation:
-- **`codelldb`** (Required for `<F7>` debug automation)
-- **`clangd`** (C/C++ Language Server Protocol)
-- **`stylua`**, **`shellcheck`**, **`shfmt`**, **`flake8`** (Formatters & linters)
