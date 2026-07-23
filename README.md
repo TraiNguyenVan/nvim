@@ -64,6 +64,20 @@ The following editor tools are installed automatically or manually inside Neovim
 - **`clangd`** (C/C++ Language Server Protocol)
 - **`stylua`**, **`shellcheck`**, **`shfmt`**, **`flake8`** (Formatters & linters)
 
+### 🐳 4. Dockerized Alternative (Instant & Lightweight)
+If you do not want to install compilers or git binaries directly on your host machine, you can run this entire development environment inside a **~5MB Alpine Linux Docker container** with all packages pre-baked:
+
+```bash
+# Move to your config directory and start the setup
+cd ~/.config/nvim
+./docker-run.sh
+```
+
+**What it does:**
+1. Builds a lightweight Docker image containing `neovim`, `gcc/g++`, `git`, `fzf`, `lazygit`, and your custom configuration.
+2. Automates downloading and caching of all Neovim plugins during the build phase (so runtime start is instant).
+3. Launches Neovim and mounts your current host working directory directly to `/workspace` inside the container.
+
 ---
 
 ## 🎹 Keyboard Shortcuts & Workflows
