@@ -16,36 +16,54 @@ A customized [LazyVim](https://github.com/LazyVim/LazyVim) configuration specifi
 
 ## 📥 Installation & Setup
 
-Neovim configurations only contain editor settings. System-level tools (compilers, terminal emulators, and git tools) must be installed on your host system.
+Choose **one** of the two paths below to initialize your development environment:
 
-### 1. Clone the Configuration
-Clone this repository to your local Neovim config folder:
+### 🐳 Option A: Containerized Setup (Easiest & Cleanest)
+Run this pre-baked Neovim environment (containing all compilers, LSPs, and plugins) without polluting your host machine's system packages.
+
+#### 🔴 Run with Podman (Fedora default - Rootless & SELinux compatible)
 ```bash
-git clone https://github.com/TraiNguyenVan/nvim.git ~/.config/nvim
+podman run -it --rm -v "$(pwd):/workspace:Z" heodocker/nvim:latest
 ```
 
-### 2. Install System Dependencies
-Choose the command block corresponding to your Linux distribution:
-
-#### 🔵 Fedora Linux
+#### 🔵 Run with Docker
 ```bash
-# Install compilation tools (g++, gcc, gdb)
+docker run -it --rm -v "$(pwd):/workspace" heodocker/nvim:latest
+```
+
+#### 🛠️ (Optional) Build & Run Locally
+If you prefer to build the Alpine image locally instead of pulling it from DockerHub:
+```bash
+cd ~/.config/nvim
+./docker-run.sh
+```
+
+---
+
+### 💻 Option B: Native Host Installation
+Use this path to install and run Neovim directly on your local system.
+
+#### 1. Install System Dependencies
+Run the command block corresponding to your Linux distribution:
+
+##### 🔵 Fedora Linux
+```bash
+# Install compilers & debugger
 sudo dnf groupinstall "Development Tools"
 sudo dnf install gcc-c++ gdb
 
-# Enable Copr repo for lazygit and install it
+# Enable Copr repo and install lazygit
 sudo dnf copr enable atim/lazygit -y
 sudo dnf install lazygit
 
-# Install other CLI helpers and terminal emulators
+# Install CLI utilities and terminals
 sudo dnf install fzf git ptyxis kitty
 ```
 
-#### 🟠 Debian / Ubuntu Linux
+##### 🟠 Debian / Ubuntu Linux
 ```bash
-# Install compilation tools (g++, gcc, gdb)
-sudo apt update
-sudo apt install build-essential gdb git fzf -y
+# Install compilers, debugger, git, and fzf
+sudo apt update && sudo apt install build-essential gdb git fzf -y
 
 # Install terminal emulators (optional, for <F5> launcher)
 sudo apt install ptyxis kitty -y
@@ -58,31 +76,16 @@ sudo install lazygit /usr/local/bin/
 rm lazygit lazygit.tar.gz
 ```
 
-### 3. Neovim Mason Packages
-The following editor tools are installed automatically or manually inside Neovim. Open Neovim and run `:Mason` to verify their installation:
+#### 2. Clone the Configuration
+```bash
+git clone https://github.com/TraiNguyenVan/nvim.git ~/.config/nvim
+```
+
+#### 3. Setup LSPs & Formatters (via Mason)
+Open Neovim and run `:Mason` to verify or install the following local packages:
 - **`codelldb`** (Required for `<F7>` debug automation)
 - **`clangd`** (C/C++ Language Server Protocol)
 - **`stylua`**, **`shellcheck`**, **`shfmt`**, **`flake8`** (Formatters & linters)
-
-### 🐳 4. Dockerized Alternative (Instant & Lightweight)
-If you do not want to clone this repository, set up local files, or compile the image yourself, you can pull and run this entire development environment from DockerHub with a **single command**:
-
-```bash
-docker run -it --rm -v "$(pwd):/workspace" <your-dockerhub-username>/nvim:latest
-```
-
-*Note: Replace `<your-dockerhub-username>` with the DockerHub namespace where the image was published.*
-
-#### 🛠️ Or, Build & Run Locally:
-If you prefer to build the Alpine container locally on your machine:
-```bash
-cd ~/.config/nvim
-./docker-run.sh
-```
-
-**What it does:**
-1. Spins up a lightweight Alpine Linux container containing `neovim`, `gcc/g++`, `git`, `fzf`, `lazygit`, and your custom configurations pre-baked.
-2. Mounts your current host directory directly to `/workspace` inside the container so you can compile and edit files seamlessly.
 
 ---
 
