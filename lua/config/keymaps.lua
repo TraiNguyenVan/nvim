@@ -30,8 +30,12 @@ vim.keymap.set("n", "<F5>", function()
 
     if run_cmd then
         vim.cmd("write")
-        if vim.fn.executable("kitty") == 1 then
+        if vim.fn.executable("ptyxis") == 1 then
+            vim.fn.jobstart({ "ptyxis", "--", "bash", "-c", run_cmd }, { detach = true })
+        elseif vim.fn.executable("kitty") == 1 then
             vim.fn.jobstart({ "kitty", "-e", "bash", "-c", run_cmd }, { detach = true })
+        elseif vim.fn.executable("gnome-terminal") == 1 then
+            vim.fn.jobstart({ "gnome-terminal", "--", "bash", "-c", run_cmd }, { detach = true })
         else
             local Terminal = require("toggleterm.terminal").Terminal
             local run_term = Terminal:new({
