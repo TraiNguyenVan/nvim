@@ -43,7 +43,7 @@ Here is the custom automation mapped to your functional keys:
 Simply clone this repository to your local Neovim config folder:
 
 ```bash
-git clone https://github.com/TraiNguyenVan/nvimmm.git ~/.config/nvim
+git clone https://github.com/TraiNguyenVan/nvim.git ~/.config/nvim
 ```
 
 ---
