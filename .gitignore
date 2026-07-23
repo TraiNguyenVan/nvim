@@ -1,8 +1,37 @@
-tt.*
-.tests
-doc/tags
-debug
+# Neovim / Vim Swaps and Backups
+*.swp
+*.swo
+*~
+.netrwhist
 .repro
-foo.*
+
+# Compiled C/C++ Outputs
+*.o
+*.obj
+*.out
+a.out
+*.so
+*.dylib
+*.dll
+build/
+bin/
+out/
+debug/
+
+# Python Virtual Environments & Caches
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Local Configs & Logs
 *.log
-data
+.tests/
+.neoconf.json
+.luarc.json
+
+# Custom Ignored Patterns
+tt.*
+foo.*
+data/
