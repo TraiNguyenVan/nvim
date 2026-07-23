@@ -71,11 +71,14 @@ Maintain code quality with auto-formatting and compiler integrations.
 Track and commit changes without leaving Neovim.
 
 - **`<leader>gg`** — **Open LazyGit**: Launches the full terminal Git interface in a floating window.
-- **`]c`** / **`[c`** — **Next/Prev Hunk**: Move cursor directly to the next/previous code change.
+- **`]h`** / **`[h`** — **Next/Prev Hunk**: Move cursor directly to the next/previous code change.
 - **`<leader>ghd`** — **Diff Hunk**: View inline diff comparing changes in the current block to the git index.
 - **`<leader>ghs`** — **Stage Hunk**: Stage the current hunk of changes.
 - **`<leader>ghr`** — **Reset Hunk**: Revert the current hunk to the committed state.
-- **`<leader>gB`** — **Git Blame Line**: Show git blame information for the current line.
+- **`<leader>gf`** — **Git Blame Line**: Show git blame information for the current line.
+
+> [!TIP]
+> **WhichKey Integration**: LazyVim has built-in interactive menus. If you're ever unsure about a keybind, simply press your leader key (`<space>`) or the group key (like `g` for Git, `d` for Debug, or `f` for Find) and wait 1 second. A popup menu will display all registered keymaps and their exact functions.
 
 ---
 
