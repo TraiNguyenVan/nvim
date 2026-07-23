@@ -67,15 +67,31 @@ Maintain code quality with auto-formatting and compiler integrations.
 
 ---
 
-### 🐙 5. Git Workflow (`gitsigns` & `lazygit`)
-Track and commit changes without leaving Neovim.
+### 🐙 5. Git Workflow & LazyGit Guide
+Track, diff, stage, commit, and push your changes seamlessly.
 
-- **`<leader>gg`** — **Open LazyGit**: Launches the full terminal Git interface in a floating window.
-- **`]h`** / **`[h`** — **Next/Prev Hunk**: Move cursor directly to the next/previous code change.
-- **`<leader>ghd`** — **Diff Hunk**: View inline diff comparing changes in the current block to the git index.
-- **`<leader>ghs`** — **Stage Hunk**: Stage the current hunk of changes.
-- **`<leader>ghr`** — **Reset Hunk**: Revert the current hunk to the committed state.
-- **`<leader>gf`** — **Git Blame Line**: Show git blame information for the current line.
+#### 🔍 Inline Hunk Management (`gitsigns`):
+- **`]h`** / **`[h`** — **Next/Prev Hunk**: Jump cursor directly to the next/previous code change.
+- **`<leader>gf`** — **Git Blame Line**: Show git author and commit info inline for the active line.
+- **`<leader>ghd`** — **Diff Hunk**: View side-by-side or inline diff comparing the active code block to the git index.
+- **`<leader>ghs`** — **Stage Hunk**: Stage the current block of modifications.
+- **`<leader>ghr`** — **Reset Hunk**: Undo changes in the current block back to the last commit.
+
+#### 🎛️ Interactive floating Git GUI (`lazygit`):
+- **`<leader>gg`** — **Open LazyGit**: Launches the LazyGit TUI inside a floating terminal.
+- **`<leader>gG`** — **Open LazyGit (cwd)**: Launches LazyGit scoped to the current working subdirectory.
+
+Once inside **LazyGit**, use these essential controls:
+- **`1` / `2` / `3` / `4` / `5`** — Switch focus to panels: Status, Files, Branches, Commits, Stash.
+- **`Space`** — **Stage/Unstage** selected file or changes.
+- **`a`** — Stage all files.
+- **`c`** — **Commit** staged changes (opens input field to write commit message).
+- **`P`** (Shift+p) — **Push** local commits to the remote origin.
+- **`p`** (lowercase) — **Pull** remote changes into local branch.
+- **`3` $\rightarrow$ Highlight Branch $\rightarrow$ `Space`** — **Switch Branch** (Checkout).
+- **`3` $\rightarrow$ `n`** — Create a **New Branch** from current HEAD.
+- **`Esc`** or **`q`** — Exit the LazyGit screen.
+- **`?`** — Display a full help sheet of shortcuts inside any focused panel.
 
 > [!TIP]
 > **WhichKey Integration**: LazyVim has built-in interactive menus. If you're ever unsure about a keybind, simply press your leader key (`<space>`) or the group key (like `g` for Git, `d` for Debug, or `f` for Find) and wait 1 second. A popup menu will display all registered keymaps and their exact functions.
