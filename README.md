@@ -23,12 +23,12 @@ Run this pre-baked Neovim environment (containing all compilers, LSPs, and plugi
 
 #### 🔴 Run with Podman (Fedora default - Rootless & SELinux compatible)
 ```bash
-podman run -it --rm -v "$(pwd):/workspace:Z" heodocker/nvim:latest
+podman run -it --rm -v "$(pwd):/workspace:Z" docker.io/heodocker/nvim:latest
 ```
 
 #### 🔵 Run with Docker
 ```bash
-docker run -it --rm -v "$(pwd):/workspace" heodocker/nvim:latest
+docker run -it --rm -v "$(pwd):/workspace" docker.io/heodocker/nvim:latest
 ```
 
 #### 🛠️ (Optional) Build & Run Locally
