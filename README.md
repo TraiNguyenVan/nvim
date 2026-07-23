@@ -125,19 +125,48 @@ git clone https://github.com/TraiNguyenVan/nvim.git ~/.config/nvim
 
 ---
 
-## 🛠️ System Requirements
+## 🛠️ System Requirements & Installation
 
-To take full advantage of this configuration, ensure the following dependencies are installed:
+Neovim configurations only contain editor settings. System-level tools (compilers, terminal emulators, and git tools) must be installed on your host system.
 
-### 1. Compilers & Debuggers
-- `gcc` and `g++` (or `clang`/`clang++`)
-- `gdb` or `lldb`
+### 1. Install System Dependencies
 
-### 2. LSP & Mason Packages
-Run `:Mason` in Neovim and ensure the following are installed:
-- `codelldb` (Required for F7 debugging automation)
-- `clangd` (LSP server for C/C++)
-- `stylua`, `shellcheck`, `shfmt`, `flake8` (Linters & formatters)
+Choose the command block corresponding to your Linux distribution:
 
-### 3. Optional Features
-- External Terminal: **Ptyxis**, **Kitty**, or **Gnome Terminal** (If available, `<F5>` compiles and spawns your application in a dedicated external window).
+#### 🔵 Fedora Linux
+```bash
+# Install compilation tools (g++, gcc, gdb)
+sudo dnf groupinstall "Development Tools"
+sudo dnf install gcc-c++ gdb
+
+# Install CLI helper utilities
+sudo dnf install lazygit fzf git
+
+# Install terminal emulators (optional, for <F5> launcher)
+sudo dnf install ptyxis kitty
+```
+
+#### 🟠 Debian / Ubuntu Linux
+```bash
+# Install compilation tools (g++, gcc, gdb)
+sudo apt update
+sudo apt install build-essential gdb git fzf -y
+
+# Install terminal emulators (optional, for <F5> launcher)
+sudo apt install ptyxis kitty -y
+
+# Install lazygit (via github release binary)
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin/
+rm lazygit lazygit.tar.gz
+```
+
+---
+
+### 2. Neovim Mason Packages
+The following editor tools are installed automatically or manually inside Neovim. Open Neovim and run `:Mason` to verify their installation:
+- **`codelldb`** (Required for `<F7>` debug automation)
+- **`clangd`** (C/C++ Language Server Protocol)
+- **`stylua`**, **`shellcheck`**, **`shfmt`**, **`flake8`** (Formatters & linters)
