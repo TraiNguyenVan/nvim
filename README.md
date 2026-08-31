@@ -18,6 +18,7 @@ A customized [LazyVim](https://github.com/LazyVim/LazyVim) configuration specifi
 
 Choose **one** of the two paths below to initialize your development environment:
 
+### ! WARNING THIS OPTION IS NOT WORKING WELL FOR SOME REASONS, [YOU SHOULD GO FOR OPTION B] !
 ### 🐳 Option A: Containerized Setup (Easiest & Cleanest)
 Run this pre-baked Neovim environment (containing all compilers, LSPs, and plugins) without polluting your host machine's system packages.
 
