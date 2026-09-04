@@ -1,0 +1,48 @@
+# Git
+.git
+.gitignore
+.github
+
+# Build / binary outputs (don't bloat image context)
+build/
+bin/
+out/
+debug/
+*.o
+*.obj
+*.out
+a.out
+*.so
+*.dylib
+*.dll
+
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Neovim cache / local
+.tests/
+.neoconf.json
+.luarc.json
+lazy-lock.json
+
+# Editor swaps
+*.swp
+*.swo
+*~
+.netrwhist
+.repro
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Custom ignores from .gitignore
+tt.*
+foo.*
+data/
+*.log

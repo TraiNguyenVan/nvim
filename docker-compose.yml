@@ -1,0 +1,34 @@
+# Fullsize LazyVim — compose wrapper for the Dockerfile
+# Usage:
+#   docker compose run --rm nvim              # open nvim in ./  (mounted as /workspace)
+#   docker compose run --rm nvim file.cpp     # open a specific file
+#   docker compose build                      # rebuild fullsize image
+
+services:
+  nvim:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nvim-cpp-env:latest
+    container_name: nvim-cpp-env
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+    volumes:
+      # Current directory → /workspace (live sync)
+      - .:/workspace
+      # Optional: persist Mason/Lazy caches across runs (uncomment if desired)
+      # - nvim-data:/root/.local/share/nvim
+      # - nvim-cache:/root/.cache
+    environment:
+      - TERM=xterm-256color
+      - COLORTERM=truecolor
+    network_mode: bridge
+    # No ports needed for TUI; expose if you add a language server with TCP
+    # ports:
+    #   - "3000:3000"
+
+# Uncomment to enable persistent plugin caches (faster rebuilds, survives `down`)
+# volumes:
+#   nvim-data:
+#   nvim-cache:

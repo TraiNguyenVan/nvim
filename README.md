@@ -18,11 +18,10 @@ A customized [LazyVim](https://github.com/LazyVim/LazyVim) configuration specifi
 
 Choose **one** of the two paths below to initialize your development environment:
 
-### ! WARNING THIS OPTION IS NOT WORKING WELL FOR SOME REASONS, [YOU SHOULD GO FOR OPTION B] !
 ### 🐳 Option A: Containerized Setup (Easiest & Cleanest)
-Run this pre-baked Neovim environment (containing all compilers, LSPs, and plugins) without polluting your host machine's system packages.
+Run the **fullsize** Debian-based Neovim environment (compilers, `clangd`, `gdb`/`lldb`, `python3`, `lazygit`, `ripgrep`/`fd`/`fzf`, `stylua`/`shellcheck`/`shfmt`, and all Lazy plugins pre-baked) without polluting your host.
 
-#### 🔴 Run with Podman (Fedora default - Rootless & SELinux compatible)
+#### 🔴 Run with Podman (Fedora default — rootless & SELinux compatible)
 ```bash
 podman run -it --rm -v "$(pwd):/workspace:Z" docker.io/heodocker/nvim:latest
 ```
@@ -30,14 +29,34 @@ podman run -it --rm -v "$(pwd):/workspace:Z" docker.io/heodocker/nvim:latest
 #### 🔵 Run with Docker
 ```bash
 docker run -it --rm -v "$(pwd):/workspace" docker.io/heodocker/nvim:latest
+# open a specific file:
+docker run -it --rm -v "$(pwd):/workspace" docker.io/heodocker/nvim:latest file.cpp
 ```
 
-#### 🛠️ (Optional) Build & Run Locally
-If you prefer to build the Alpine image locally instead of pulling it from DockerHub:
+#### 🛠️ Build & Run Locally (fullsize Debian image)
+
+**One-shot helper (auto-detects `podman`/`docker`, handles `:Z`):**
 ```bash
 cd ~/.config/nvim
-./docker-run.sh
+./docker-run.sh              # build + run, mounts $PWD → /workspace
+./docker-run.sh -- file.cpp  # open a specific file
+./docker-run.sh --help       # all flags (--no-build, --rebuild, --pull)
 ```
+
+**Manual Docker:**
+```bash
+docker build -t nvim-cpp-env .
+docker run -it --rm -v "$(pwd):/workspace" nvim-cpp-env
+```
+
+**Docker Compose (recommended for persistent workflow):**
+```bash
+docker compose run --rm nvim              # ephemeral
+docker compose run --rm nvim file.cpp     # open file
+docker compose build                      # rebuild fullsize image
+```
+
+> **Fullsize vs. minimal:** this image is intentionally **not** Alpine-stripped — it keeps man pages, docs, and the full Debian toolchain (`build-essential`, `cmake`, `valgrind`, `clang-tidy`, `lldb`, `nodejs`, etc.) so `docker exec` feels like a real dev machine. No binary stripping or `*.a` purging.
 
 ---
 
